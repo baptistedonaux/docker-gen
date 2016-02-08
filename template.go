@@ -258,6 +258,20 @@ func intersect(l1, l2 []string) []string {
 	return keys
 }
 
+func intersectNetworks(n1s []Network, n2s []Network) ([]Network) {
+	ns := []Network{}
+
+	for _, n1 := range n1s {
+		for _, n2 := range n2s {
+			if n1.Name == n2.Name {
+				ns = append(ns, n1)
+			}
+		}
+	}
+
+	return ns
+}
+
 func contains(item map[string]string, key string) bool {
 	if _, ok := item[key]; ok {
 		return true
@@ -400,6 +414,7 @@ func newTemplate(name string) *template.Template {
 		"hasSuffix":              hasSuffix,
 		"json":                   marshalJson,
 		"intersect":              intersect,
+		"intersectNetworks":      intersectNetworks,
 		"keys":                   keys,
 		"last":                   arrayLast,
 		"replace":                strings.Replace,
